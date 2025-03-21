@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %} Loans List {% endblock %}
+
+{% block content %}
+  <h2>Loan List</h2>
+  <div class="search-container">
+    <form action="{% url 'loans:loan-list' %}" method="get">
+      <input type="text" name="q" value="{{ request.GET.q }}" placeholder="search by loan name">
+    </form>
+  </div>
+
+  <ul>
+    {% for loan in loans %}
+      <li>
+        <div>
+          <strong>{{ loan.name }}</strong> <br>
+          <span class="amount">${{ loan.amount }}</span> - 
+          <span class="date">{{ loan.date }}</span>
+        </div>
+        <div>
+          <a href="{% url 'loans:loan-edit' loan.pk %}">Edit</a>
+          <a class="delete" href="{% url 'loans:loan-delete' loan.pk %}">Delete</a>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <a href="{% url 'loans:loan-add' %}" class="button">Add Loan</a>
+{% endblock %}

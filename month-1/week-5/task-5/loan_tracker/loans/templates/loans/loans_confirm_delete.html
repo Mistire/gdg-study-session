@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete Loan{% endblock %}
+
+{% block content %}
+  <main class="confirm-delete">
+    <h2>Are you sure you want to delete this loan?</h2>
+    <p><strong>{{ loan.name }}</strong>: ${{ loan.amount }} - {{ loan.date }}</p>
+
+    <form method="post">
+      {% csrf_token %}
+      <button type="submit" class="delete">Yes, Delete</button>
+    </form>
+
+    <a href="{% url 'loans:loan-list' %}" class="cancel">Cancel</a>
+  </main>
+{% endblock %}

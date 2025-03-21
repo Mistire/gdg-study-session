@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Add/Edit Loan{% endblock %}
+
+{% block content %}
+  <h2>{% if form.instance.pk %}Edit Loan{% else %}Add Loan{% endif %}</h2>
+
+  <form method="post" action="{% if form.instance.pk %}{% url 'loans:loan-edit' form.instance.pk %}{% else %}{% url 'loans:loan-add' %}{% endif %}">
+    {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Save</button>
+  </form>
+
+  <a href="{% url 'loans:loan-list' %}">Cancel</a>
+  {% endblock %}
